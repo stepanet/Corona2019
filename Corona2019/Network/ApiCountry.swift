@@ -23,7 +23,9 @@ class ApiCountry: ObservableObject {
             } catch {
                 print("Failed to json decode!:",error.localizedDescription)
             }
-                completion(self.countrys)
+                completion(self.countrys.sorted {
+                    $0.Country < $1.Country
+                })
             }
         }.resume()
     }
