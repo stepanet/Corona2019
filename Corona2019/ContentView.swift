@@ -21,32 +21,42 @@ struct ContentView: View {
         
         VStack {
             
-            Text("Covid-2019 information for Amir")
-                .font(.largeTitle)
-                .kerning(-2)
-                .multilineTextAlignment(.center)
+            HStack(alignment: .top, spacing: 30) {
+                Image(systemName: "info.circle.fill")
+                    .renderingMode(.original)
+                    .font(.largeTitle)
+                Text("Covid-2019 INFORMATION")
+                    .font(.largeTitle)
+                    .kerning(-2)
+                    .multilineTextAlignment(.center)
+            }
                 
             Divider()
             Text("Country: \(self.countryName)")
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .kerning(2)
                 .multilineTextAlignment(.center)
                 .padding(.top, 12)
             Text("Number of cases: \(infections.last?.Confirmed ?? 0)")
                 .font(.title3)
+                .kerning(2)
                 .multilineTextAlignment(.center)
                 .padding(.top, 12)
             Text("The gain for the day: \(cases)")
                 .font(.title3)
+                .kerning(2)
                 .multilineTextAlignment(.center)
                 .padding(.top, 12)
-            Divider()
-            
             NavigationView {
                 Form {
                     Section {
                         Picker(selection: $selectedCountry, label: Text("")) {
                             ForEach(0 ..< countrys.count) {
                                 Text(self.countrys[$0].Country)
+                                    .font(.largeTitle)
+                                    .kerning(-2)
+                                    .multilineTextAlignment(.leading)
+                                    .padding()
                             }
                         }
                     }

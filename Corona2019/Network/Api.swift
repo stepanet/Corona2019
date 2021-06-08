@@ -14,7 +14,7 @@ class Api: ObservableObject {
     @Published var infections = [CovidData]()
     
     func getCoviData(country: String, completion: @escaping([CovidData]) -> ()) {
-        guard let url = URL(string: "https://api.covid19api.com/total/dayone/country/\(country.lowercased())".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else { return }
+        guard let url = URL(string: "https://api.covid19api.com/total/dayone/country/\(country.lowercased())"/*.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""*/) else { return }
         
         URLSession.shared.dataTask(with: url) {(data, resp, err ) in
             guard let data = data else { return }
@@ -25,6 +25,7 @@ class Api: ObservableObject {
                 print("Failed to json decode:",error.localizedDescription)
             }
             DispatchQueue.main.asyncAfter(deadline: .now()) {
+                //print(url.absoluteString)
                 completion(self.infections)
             }
         }.resume()
